@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, Image, TouchableHighlight } from "react-native";
+import { Text, View, Image, TouchableHighlight, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 import useStore, { StoreInterface } from "../../utils/store";
 import { CartNotification, HeaderCart, HeaderContainer } from "../../style";
@@ -51,11 +51,11 @@ const CheckoutCart = () => {
               <ProductImage source={{ uri: product.image }} />
               <ProductName>{product.name}</ProductName>
             </ProductImageAndTitle>
-            <TouchableHighlight onPress={() => removeProductOnCart(product)}>
+            <TouchableOpacity onPress={() => removeProductOnCart(product)}>
               <DeleteProductImage
                 source={{ uri: require("../../assets/icons/trash.png") }}
               />
-            </TouchableHighlight>
+            </TouchableOpacity>
           </ProductView>
         ))}
       </ProductContainer>

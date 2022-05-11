@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "teste-ton",
-    "slug": "teste-ton",
+    "name": "react-native-teste",
+    "slug": "react-native-teste",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
     ]
   },
-  "name": "teste-ton"
+  "name": "react-native-teste"
 }

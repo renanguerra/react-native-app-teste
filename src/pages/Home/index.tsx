@@ -1,15 +1,30 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, SafeAreaView, Text, Image } from "react-native";
 import { Link } from "react-router-native";
 import { CartNotification, HeaderCart, HeaderContainer } from "../../style";
 import ProductViewer from "../../components/ProductViewer";
 import { ProductContainer } from "../../style";
-import { products } from "../../utils/constants";
-import useStore, { StoreInterface } from "../../utils/store";
+import useStore, { ProductInterface, StoreInterface } from "../../utils/store";
+import axios from "axios";
 
 const Home = () => {
   const cart = useStore((state: StoreInterface) => state.cart);
+  const [products, setProducts] = useState<ProductInterface[]>([]);
+  const [loading, setLoading] = useState<boolean>();
+
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get("https://heroku-api-testes.herokuapp.com/")
+      .then((result) => {
+        setProducts(result.data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -37,6 +52,16 @@ const Home = () => {
       </HeaderContainer>
 
       <ProductContainer>
+        {products.length === 0 && !loading && (
+          <Text style={{ textAlign: "center" }}>
+            Nenhum produto disponivel!
+          </Text>
+        )}
+
+        {loading && (
+          <Text style={{ textAlign: "center" }}>Carregando produtos...</Text>
+        )}
+
         {products.map((product, index) => (
           <ProductViewer product={product} key={index} />
         ))}

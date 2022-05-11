@@ -8,7 +8,6 @@ export const ProductContainer = styled.View`
   margin-top: 50px;
 `;
 
-
 export const PrimaryButton = styled.Text`
   padding: 5px;
   width: 80%;
